@@ -1,0 +1,31 @@
+Busquei fazer o mini app conforme solicitado, coloquei apenas uma ou duas mudanças por questão de praticidade.
+Usei Linux com Kernel 5.10.0, mas o código roda sem necessidade de importações com python 3.9 (se for baixar
+o interpretador, o site oficial é esse: https://www.python.org/downloads/)
+o interpretador 3.9 é suportado somente no windows 10 em diante, se precisar baixar uma versão anterior.
+No windows, para instalar dependências, uma vez instalado o interpretador (precisa ser o 3.6 em diante), rode:
+py -m pip install -r requirementos.txt
+
+no linux, se tiver usando uma versão de interpretador anterior, basta rodar um desses comandos no terminal:
+pip3 install -r requirementos.txt
+
+ou este (se o anterior falhar)
+pip install -r requirementos.txt
+
+para rodar o código, com o terminal aberto nesta mesma pasta, rode o comando:
+No linux:
+python3 main.py
+ou
+python main.py
+no windows:
+py -m main.py
+ou ainda:
+python main.py
+
+Todos os arquivos foram criados de maneira que fosse intuitivo para buscar elementos, depurar, etc. Não criei níveis
+de diretórios por questão de praticidade, uma vez que fiz poucos arquivos e seus nomes já dizem o que fazem a princípio.
+Buscarei documentar estas poucas linhas de códigos o melhor que puder.
+Você vai notar que 1) não fiz muitos tratamentos para erros (nenhum sequer com try/ecxept) e 2) usei o quanto
+pude o portugues. Quanto ao primeiro, simplesmente me apoiei muito nas bibliotecas python e na própria 
+google, então, realmente, não tive muito trabalho.
+Quanto ao segundo, bem, sei que esse exercício será lido por brasileiros e somente a princípio, então
+não faria muito sentido escrever tudo em inglês nesse primeiro momento.
