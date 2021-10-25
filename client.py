@@ -134,6 +134,10 @@ class Resposta(_Quadro):
 
 
 class Casa(_Quadro):
+	"""
+    Classe que faz o início do aplicativo e usa a função da api.py
+
+	"""
 	def __init__(self,tela, **kwargs):
 		super().__init__(tela, **kwargs)
 		self.aviso=tk.Label(self.frame, text="Faça sua busca aqui", bg=fundo,bd=0, font=('Times',30,'bold'),fg="white")
@@ -145,7 +149,10 @@ class Casa(_Quadro):
 
 
 	def pegar(self):
-		""""""
+		"""
+        Método que escreve o arquivo temps.json 
+        e muda para a tela de resposta
+		"""
 		tratar(self.entrada.get())
 
 		self.mudar_quadro(Resposta, bg=fundo2, highlightbackground='black', highlightthickness=1)
