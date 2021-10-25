@@ -5,22 +5,23 @@ import json
 import webbrowser as wb
 
 """
-front.py, gerencia toda a parte de apresentação e iteração com o cliente através 
-de interface GUI, através de POO é possível simular todas as 'Páginas'
-do aplicativo e mexer com tranqüilidade para a fase de desenvolvimento. Mais informações,
-consulte o LEIAME.txt
+Este é o módulo destinado a tratar apenas da interação com o cliente através de 
+interface gui, utilizei a biblioteca tkinter para concluir o desenvolvimento
+dessa parte do aplicativo. 
 """
 
 
 
 
-
+#Instancia um objeto representando uma tela
 tela=tk.Tk()
 #Seta para tela cheia
 altura=str(tela.winfo_screenheight())
 largura=str(tela.winfo_screenwidth())
 tela.geometry(largura+'x'+altura)
+#dá o título
 tela.title(titulo)
+#configura a cor de fundo
 tela.configure(background=fundo)
 #tela.configure(cursor="pencil")#Se estiver curioso(a), basta descomentar o código ao lado
 
@@ -30,66 +31,99 @@ class _Quadro():
     nesse caso pois senti a necessidade de padronizar alguns comportamentos de
     toda e qualquer tela que venha a ser criada, dando a sensação de dinamismo
     ao aplicativo, é nele que "penduramos" todos os outros widgets e fazemos retornar
+    ao cliente a visualização
 	"""
 	def __init__(self, tela, **kwargs):
+		"""
+        Função que é chamada sempre que 
+        for invocada uma instância de classe,
+        ela que determina quais atributos a classe possui de início
+		"""
 		self.tela=tela
 		self.frame=tk.Frame(self.tela, **kwargs)
 		self.frame.place(relx=0, rely=0, relwidth=1, relheight=1)
 
 	def mudar_quadro(self, quadro, **kwargs):
 		"""
-		Classe utilizada para manejar a classe Frame do tkinter. 
-		Fiz uma classe pai nesse caso pois senti a necessidade de padronizar alguns 
-		comportamentos de toda e qualquer tela que venha a ser criada, 
-		dando a sensação de dinamismo ao aplicativo, é nele que "penduramos" 
-		todos os outros widgets e fazemos retornar
+		Este método foi desenvolvido para mudar rapidamente 
+		de uma instância de _Quadro para outra, tornando possivel a 
+		navegação pelo aplicativo
 		"""
 		self.frame.destroy()
 		quadro(self.tela,**kwargs)
 
+class Link(tk.Label):
+	""""""
+	def __init__(self, frame, **kwargs):
+		"""
+        Função que é chamada sempre que 
+        for invocada uma instância de classe,
+        ela que determina quais atributos a classe possui de início
+		"""
+		#Esse método instancia a função __init__ do pai
+		super().__init__(frame, **kwargs)
+		#configura um comando para Label
+		self.bind("<Button-1>", lambda e:self.redirecionar())
+
+	def redirecionar(self):
+		wb.open_new_tab(self['text'].replace('[','').replace(']',''))
+
 class Resposta(_Quadro):
+	"""
+    Classe que mostra na tela o resultado das buscas, com a descrição e o link,
+	podendo ser redirecionado para o site quando clica no link. O redirecionamento
+	vai acontecer no browser padrão do computador.
+	"""
 	def __init__(self, tela, **kwargs):
+		"""
+        Função que é chamada sempre que 
+        for invocada uma instância de classe,
+        ela que determina quais atributos a classe possui de início
+		"""
+		#Invoca o método __init__ do pai
 		super().__init__(tela,**kwargs)
 
 		
-
+        #Instancia um objeto de Button tkinter, esse vai retornar a tela inicial
 		self.bt_voltar=tk.Button(self.frame, text=" Voltar ", command=self.voltar)
 		self.bt_voltar.place(relx=0, rely=0)
 
 		
-		
+		#veja a descrição do método dentro dele
 		self.printar()
-		"""
-		exemplo bem aqui embaixo
-		self.desc=tk.Label(self.frame, text="Angra - LETRAS.MUS.BR", bg=fundo2, bd=0)
-		self.link=tk.Label(self.frame, text="[https://www.letras.mus.br/angra/]", bg=fundo2, bd=0, cursor="hand2",fg=links)
-		self.link.bind("<Button-1>", lambda e: self.redirecionar(self.link['text']))
-		self.desc.place(relx=0, rely=0.1)
-		self.link.place(relx=0, rely=0.12)
-		"""
+		
 
 	def printar(self):
-		""""""
+		"""
+        Método que renderiza os resultados no arquivo temps.json na tela
+        é utilizado alguns artifícios para colocar até 10 resultados,
+        com seu título e link
+		"""
 		with open('temps.json') as f:
 			res=json.load(f)
 
+
+
 		espaco=0.06
-		for k, v in res.items():
-			self.desc=tk.Label(self.frame,text=k,bg=fundo2, bd=0)
-			self.desc.place(relx=0,rely=espaco)
-			self.link=tk.Label(self.frame, text=v, bg=fundo2, bd=0, cursor="hand2", fg=links)
-			self.link.bind("<Button-1>",lambda e:self.redirecionar(self.link['text']))
-			self.link.place(relx=0,rely=espaco+0.025)
+
+		#faz um dicionário com chaves Label e valor Button para os links
+		final={}
+		for k,v in res.items():
+			titulo=tk.Label(self.frame, text=k, bg=fundo2, bd=0)
+			link=Link(self.frame, text=v, bg=fundo2, bd=0, fg=links, cursor="hand2")
+			final[titulo]=link
+		#aqui que serão posicionados cada um dos componentes
+		for k,v in final.items():
+			k.place(relx=0.01, rely=espaco)
+			v.place(relx=0.01, rely=espaco+0.025)
 			espaco+=0.07
-		
-
-
-
-	def redirecionar(self, link):
-		wb.open_new_tab(link.replace('[','').replace(']',''))
 
 
 	def voltar(self):
+		"""
+        Método usado para voltar para a tela de busca
+        reutilizando mudar_quadro da classe pai
+		"""
 		self.mudar_quadro(Casa, bg=fundo, highlightbackground='black', highlightthickness=1)
 
 
@@ -114,13 +148,4 @@ class Casa(_Quadro):
 if __name__=="__main__":
 	quadro=Casa(tela, bg=fundo, highlightbackground='black', highlightthickness=1)
 	tela.mainloop()
-
-
-
-
-
-
-
-
-
 
