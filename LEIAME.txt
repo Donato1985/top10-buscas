@@ -1,8 +1,13 @@
 Busquei fazer o mini app conforme solicitado, coloquei apenas uma ou duas mudanças por questão de praticidade.
-Usei Linux com Kernel 5.10.0, mas o código roda sem necessidade de importações com python 3.9 (se for baixar
+Conceitualmente, o aplicativo pede uma busca que será feita no google e guarda em formato json (sendo que a chave 
+é uma string com o título e o valor é o link para o site - poderia fazer algo mais elaborado, mas não senti necessidade 
+de fazê-lo nesse primeiro momento) no arquivo temps.json, e retorna ao usuário uma lista na tela com o título do google
+e o link que quando clica, redireciona para o site através do browser padrão no máximo 10 resultados (que no final das 
+contas costuma ser u suficiente).
+Usei Linux com Kernel 5.10.0, o código roda sem necessidade de importações com o python 3.9 (se for baixar
 o interpretador, o site oficial é esse: https://www.python.org/downloads/)
-o interpretador 3.9 é suportado somente no windows 10 em diante, se precisar baixar uma versão anterior.
-No windows, para instalar dependências, uma vez instalado o interpretador (precisa ser o 3.6 em diante), rode:
+o interpretador 3.9 é suportado somente no windows 10 em diante. 
+Caso precise baixar uma versão anterior,no windows, para instalar dependências, uma vez instalado o interpretador (precisa ser o 3.6 em diante), rode:
 py -m pip install -r requirementos.txt
 
 no linux, se tiver usando uma versão de interpretador anterior, basta rodar um desses comandos no terminal:
@@ -24,8 +29,11 @@ python main.py
 Todos os arquivos foram criados de maneira que fosse intuitivo para buscar elementos, depurar, etc. Não criei níveis
 de diretórios por questão de praticidade, uma vez que fiz poucos arquivos e seus nomes já dizem o que fazem a princípio.
 Buscarei documentar estas poucas linhas de códigos o melhor que puder.
-Você vai notar que 1) não fiz muitos tratamentos para erros (nenhum sequer com try/ecxept) e 2) usei o quanto
+Você vai notar que 1) não fiz muitos tratamentos para erros e 2) usei o quanto
 pude o portugues. Quanto ao primeiro, simplesmente me apoiei muito nas bibliotecas python e na própria 
 google, então, realmente, não tive muito trabalho.
-Quanto ao segundo, bem, sei que esse exercício será lido por brasileiros e somente a princípio, então
+Quanto ao segundo, bem, sei que esse exercício será lido por brasileiros, e somente por brasileiros, a princípio, então
 não faria muito sentido escrever tudo em inglês nesse primeiro momento.
+Espero que gostem, fiz o melhor possível (sabendo que nenhum software nunca estará terminado).
+Observação: Quando aparecer a tela de resultados, clique apenas uma vez, vai demorar um pouco (especialmente na primeira vez), mas vai abrir o resultado no seu navegador padrão. Clicar diversas vezes só vai acabar abrindo diversas janelas no 
+navegador e possivelmente travar seu computador (aconteceu comigo :)) 

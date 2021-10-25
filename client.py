@@ -53,7 +53,13 @@ class _Quadro():
 		quadro(self.tela,**kwargs)
 
 class Link(tk.Label):
-	""""""
+	"""
+    Criei uma classe filha de tk.Label para conseguir inserir 
+    um redirecionamento para o link que desejo. Instanciando a
+    classe diretamente, ou acaba redirecionando apenas para o
+    último link (não importa qual link clique)
+    ou acaba abrindo todos os links listados na tela
+	"""
 	def __init__(self, frame, **kwargs):
 		"""
         Função que é chamada sempre que 
@@ -145,7 +151,4 @@ class Casa(_Quadro):
 		self.mudar_quadro(Resposta, bg=fundo2, highlightbackground='black', highlightthickness=1)
 
 
-if __name__=="__main__":
-	quadro=Casa(tela, bg=fundo, highlightbackground='black', highlightthickness=1)
-	tela.mainloop()
 
