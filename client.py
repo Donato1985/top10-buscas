@@ -145,7 +145,7 @@ class Casa(_Quadro):
 		self.entrada=tk.Entry(self.frame,bd=2)
 		self.entrada.place(relx=0.2,rely=0.35,relwidth=0.6)
 		self.bt=tk.Button(self.frame,text=" Buscar ", command=self.pegar)
-		self.bt.place(relx=0.45,rely=0.4)
+		self.bt.place(relx=0.46,rely=0.4,relwidth=0.075)
 
 
 	def pegar(self):
